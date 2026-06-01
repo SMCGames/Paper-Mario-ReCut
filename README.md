@@ -33,7 +33,7 @@ The so called game assets included are not in any way from the ROM or assets the
 
 We need to stop giving so much weight to people who appear to have personal vendettas against AI and are trying to sabotage anything useful that may come from it. I chose to release this because Battleship has already proven to be an amazing port, and the possibilities these tools create for preservation are more important than people’s egos.
 
-In the meantime I've been working on some of the stuff that doesn't work in the current release and I'm sure those who choose to play will be surprised and happy about what's been acheived. Update Soon!!
+In the meantime I've been working on some of the stuff that doesn't work in the current release and I'm sure those who choose to play will be surprised and happy about what's been achieved. Update Soon!!
 
 ## Features
 
