@@ -4,15 +4,42 @@
 ### <img width="1285" height="994" alt="Pic1" src="https://github.com/user-attachments/assets/47b4af91-d8b3-4905-a525-ad5b05453eb8" />
 Paper Mario ReCut is a native Windows PC recompilation project for *Paper Mario* on Nintendo 64. It is built around the N64 recompilation toolchain, RT64 rendering, local legal ROM setup, live texture replacement, and the bundled Paper Atlas Tool for editing dumped texture pieces.
 
-This repository does not include ROM files, extracted ROM assets, save files, or generated ROM-derived recomp output. On first run, the app asks for your legally dumped Paper Mario (U) ROM, validates it, and installs a local copy into that user's own `user` folder.
+This repository does not include ROM files, extracted ROM assets, save files, generated TOML, or generated recomp output. Release builds follow the Zelda64Recomp-style model: the app is already built, and the launcher asks for your legally dumped Paper Mario (U) ROM, validates it by hash, and stores it locally under that user's own `user` folder. Players do not need CMake, WSL, Git, compilers, or dependency downloads to launch the game.
 
-Claims: There seems to be a lot of speculation as to what this project is and how it came to be. This first started as a hobby fun throw together with the help of AI to get N64Recomp to Play nicely with the PaperMarioDecomp. As many who have actually tried to generate the necessary files to get N64Recomp going knows it can be tedious and downright not worth the time. I know most give up before getting anywhere. My workflow also does have AI integration for formatting and optimization as a final pass which is then pushed to the github repo. Unfortunately even though it knows not to push anything in my workspace involving potentially illegal content it decided the toml that was generated to be pushed as if it were not a problem. I glanced over this and let it go which was not intentional and has been since fixed. This is just a fun project for me and I'm not trying to claim first or do anything to hurt the scene and apologize for anything that made it seem so. I do love the HarbourMasters and wouldn't mind or care if their version is the top rated highest most played version and mine dies in the shadows. I just do this for fun and preservation as that's the only true meaning for these projects.
-I'm new to this I'm sorry.
+## Clarification
+
+There seems to be a lot of speculation about what this project is and how it came to be.
+
+This started as a hobby project made for fun with the help of AI to get N64Recomp to work smoothly with the Paper Mario decomp. As many people who have tried generating the necessary files for N64Recomp know, the process can be tedious and, for many, not worth the time. I know a lot of people give up before getting very far. This project has existed for me a lot longer than the repo as well. I only created it when I had something to work with.
+
+My workflow also uses AI integration for formatting and optimization as a final pass before changes are pushed to the GitHub repo. Unfortunately, even though it is supposed to avoid pushing anything in my workspace that could involve potentially illegal content, it treated the generated TOML file as safe to push. I glanced over it and missed the issue, which was not intentional. That has since been fixed.
+
+This is just a fun project for me. I am not trying to claim that I was first, take credit from anyone else, or do anything that could hurt the scene. I apologize for anything that made it seem that way.
+
+I have a lot of respect for HarbourMasters, and I would not mind or care if their version becomes the top-rated and most-played version while mine stays in the shadows. I do this for fun and preservation, which I believe is the real purpose behind projects like this.
+
+I am new to this scene, and I am sorry for the mistakes I've made.
+
+**False Stuffs:** 
+This project was not fully “vibe coded” either.
+
+Paper Atlas was created long before this project existed. I repurposed it for this project, which I have already explained.
+
+I also do not know where the claim is coming from that the ROM check does not work. The project uses hash verification and the supplied ROM for N64Recomp. I have tried every way I can think of to recreate that claim, but I have not been able to reproduce it unless a clone was modified to behave that way. This was built in the exact manner the N64ZeldaRecomp is minus the cool fancy launcher so if there are issues in that way then there are other concerns.
+
+N64Recomp uses the ROM provided to it during the recompilation process. The ROM is supplied by the user, used by the tool, and then moved to the user folder after it has already been provided. Based on what I have tested, I suspect that some people making this claim may not have been testing in a clean-room setup.
+
+The so called game assets included are not in any way from the ROM or assets therof. No assets from the ROM are included in the release PERIOD. They simply need to share their HASH references so they know where they need to replace said textures.
+
+We need to stop giving so much weight to people who appear to have personal vendettas against AI and are trying to sabotage anything useful that may come from it. I chose to release this because Battleship has already proven to be an amazing port, and the possibilities these tools create for preservation are more important than people’s egos.
+
+In the meantime I've been working on some of the stuff that doesn't work in the current release and I'm sure those who choose to play will be surprised and happy about what's been acheived. Update Soon!!
 
 ## Features
 
 - PRESS F1 TO ACCESS THE MENU (Might change to ESC not sure yet lol)
 - First-run legal ROM setup with local validation.
+- Native launcher with Select ROM and Start Game flow.
 - Windowed RT64 renderer integration.
 - Graphics options menu with live-applying renderer settings.
 - Live Texture Replacement toggle via F2.
@@ -32,6 +59,10 @@ Save states are implemented as an early runtime snapshot system. Slot saves and 
 ### Known issues:
 1. Widescreen is currently broken, but it is still exposed for testing. Expect visual problems if you enable it. The normal 4:3 path is the intended play path for now.
 2. Using Save States in it's current implementation will break the game. Avoid For Now.
+3. Smartscreen is false positive until the app becomes signed. I have even submitted the exe for evaluation from microsoft with the response being just give it time for trust to be built. 
+I apologize for any fear of the situation.
+
+
 
 ## Runtime Folders
 
@@ -51,7 +82,7 @@ user/textures/replacements/
 user/AtlasEditing/
 ```
 
-Do not commit or distribute ROMs, save files, generated ROM output, local dumps, local replacements, or `user` folders.
+Do not commit or distribute ROMs, save files, generated ROM output, generated TOML, local dumps, local replacements, or `user` folders.
 
 ## Paper Atlas Tool
 <img width="1296" height="1058" alt="image" src="https://github.com/user-attachments/assets/fb50c23f-0cfe-470d-a20a-65d06c213a23" />
@@ -67,31 +98,36 @@ Windows builds publish `PaperAtlasTool.exe` beside `PaperMarioReCut.exe`. You ca
 
 ## Building
 
-This source tree expects generated Paper Mario recomp output at:
+Release builds are already-built playable apps with a ROM launcher. Players only provide their legally dumped Paper Mario (U) ROM when the launcher asks for it.
 
-```text
-generated/paper_mario_recomp_out/
+Building from source follows the Zelda64Recomp-style workflow: clone the repo, provide your legal ROM locally, generate the ignored recomp output, then build with CMake.
+
+Full instructions are in [BUILDING.md](BUILDING.md).
+
+Short version:
+
+```powershell
+git submodule update --init --recursive
+powershell -ExecutionPolicy Bypass -File scripts/generate_recomp_output.ps1 -RomPath "D:\path\to\Paper Mario (U).z64"
+cmake -S . -B build-recut -G "Visual Studio 17 2022" -A x64 -DPAPER_MARIO_ROM_PATH="D:\path\to\Paper Mario (U).z64"
+cmake --build build-recut --config Release --target PaperMarioReCut
 ```
 
-That folder is intentionally not committed. The RSP microcode source is also generated locally into the build directory. Generate the recomp output from your own legal ROM before configuring CMake, then pass that same ROM path as `PAPER_MARIO_ROM_PATH`.
-
-Requirements:
+Required build tools:
 
 - Visual Studio 2022 with C++ desktop tools.
 - CMake.
+- Git.
+- WSL2/Ubuntu for the local Paper Mario decompilation build.
 - .NET 8 SDK for Paper Atlas Tool.
 
-Build:
+The generated folder `generated/paper_mario_recomp_out/` is local-only and intentionally ignored by Git. Do not commit generated recomp output, ROMs, saves, or `user/`.
+
+The old setup-only bootstrap shell can still be built for local experiments, but it is not the release/player path:
 
 ```powershell
-cmake -S . -B build-recut -G "Visual Studio 17 2022" -A x64 -DPAPER_MARIO_ROM_PATH="D:\path\to\Paper Mario (U).z64"
-cmake --build build-recut --config Release
-```
-
-The Windows build output is created in:
-
-```text
-build-recut/Release/
+cmake -S . -B build-bootstrap -G "Visual Studio 17 2022" -A x64 -DPAPER_RECUT_BUILD_BOOTSTRAP=ON
+cmake --build build-bootstrap --config Release --target PaperMarioReCut
 ```
 
 ## License And Credits
