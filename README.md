@@ -6,6 +6,9 @@ Paper Mario ReCut is a native Windows PC recompilation project for *Paper Mario*
 
 This repository does not include ROM files, extracted ROM assets, save files, or generated ROM-derived recomp output. On first run, the app asks for your legally dumped Paper Mario (U) ROM, validates it, and installs a local copy into that user's own `user` folder.
 
+Claims: There seems to be a lot of speculation as to what this project is and how it came to be. This first started as a hobby fun throw together with the help of AI to get N64Recomp to Play nicely with the PaperMarioDecomp. As many who have actually tried to generate the necessary files to get N64Recomp going knows it can be tedious and downright not worth the time. I know most give up before getting anywhere. My workflow also does have AI integration for formatting and optimization as a final pass which is then pushed to the github repo. Unfortunately even though it knows not to push anything in my workspace involving potentially illegal content it decided the toml that was generated to be pushed as if it were not a problem. I glanced over this and let it go which was not intentional and has been since fixed. This is just a fun project for me and I'm not trying to claim first or do anything to hurt the scene and apologize for anything that made it seem so. I do love the HarbourMasters and wouldn't mind or care if their version is the top rated highest most played version and mine dies in the shadows. I just do this for fun and preservation as that's the only true meaning for these projects.
+I'm new to this I'm sorry.
+
 ## Features
 
 - PRESS F1 TO ACCESS THE MENU (Might change to ESC not sure yet lol)
@@ -29,10 +32,6 @@ Save states are implemented as an early runtime snapshot system. Slot saves and 
 ### Known issues:
 1. Widescreen is currently broken, but it is still exposed for testing. Expect visual problems if you enable it. The normal 4:3 path is the intended play path for now.
 2. Using Save States in it's current implementation will break the game. Avoid For Now.
-3. Smartscreen is false positive until the app becomes signed. I have even submitted the exe for evaluation from microsoft with the response being just give it time for trust to be built. 
-I apologize for any fear of the situation.
-
-
 
 ## Runtime Folders
 
@@ -94,6 +93,19 @@ The Windows build output is created in:
 ```text
 build-recut/Release/
 ```
+
+## License And Credits
+
+Paper Mario ReCut's original project code is released under the MIT License. See `LICENSE`.
+
+This project also uses and credits third-party open-source work, especially:
+
+- [N64Recomp](https://github.com/N64Recomp/N64Recomp) for the recompilation toolchain and runtime foundations.
+- [RT64](https://github.com/rt64/rt64) for the renderer.
+- [pmret/papermario](https://github.com/pmret/papermario) for the Paper Mario decompilation project, game-specific research, symbols, and source reference.
+- [SDL2](https://github.com/libsdl-org/SDL) for windowing, input, controller, and audio support.
+
+Third-party code remains under its own license terms. The upstream `pmret/papermario` repository does not currently publish a root license file, so Paper Mario ReCut does not relicense that work. See `THIRD_PARTY_NOTICES.md` and the license files inside `lib/`.
 
 ## Texture Replacement Instructions
 
