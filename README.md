@@ -27,7 +27,7 @@ Paper Atlas was created long before this project existed. I repurposed it for th
 
 I also do not know where the claim is coming from that the ROM check does not work. The project uses hash verification and the supplied ROM for N64Recomp. I have tried every way I can think of to recreate that claim, but I have not been able to reproduce it unless a clone was modified to behave that way. This was built in the exact manner the N64ZeldaRecomp is minus the cool fancy launcher so if there are issues in that way then there are other concerns.
 
-N64Recomp uses the ROM provided to it during the recompilation process. The ROM is supplied by the user, used by the tool, and then moved to the user folder after it has already been provided. Based on what I have tested, I suspect that some people making this claim may not have been testing in a clean-room setup.
+N64Recomp uses the ROM provided to it during the static recompilation process. The ROM is supplied by the user, used by the tool, and then moved to the user folder after it has already been provided for later use by N64Recomp. Based on what I have tested, I suspect that some people making this claim may not have been testing in a clean-room setup.
 
 The so called game assets included are not in any way from the ROM or assets therof. No assets from the ROM are included in the release PERIOD. They simply need to share their HASH references so they know where they need to replace said textures.
 
